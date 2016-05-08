@@ -3,7 +3,7 @@ import Bet from 'bet-cs';
 
 
 const log = new Logger(`BET:cs:${window.location.hostname}`);
-const name = 'wpd2';
+const name = 'd2w';
 
 if(chrome.runtime.onMessage) {
   log('cs script start');

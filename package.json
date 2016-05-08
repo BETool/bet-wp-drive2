@@ -33,6 +33,7 @@
     "bet-bg": "latest",
     "bet-cs": "latest",
     "bet-logger": "latest",
-    "bet-module": "latest"
+    "bet-module": "latest",
+    "bet-ping": "latest"
   }
 }

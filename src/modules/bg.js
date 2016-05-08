@@ -1,34 +1,33 @@
 import Logger from 'bet-logger';
 import Bet from 'bet-bg';
+import ping from 'bet-ping';
 
+
+ping();
 
 const log = new Logger('BET:wp:drive2');
-const name = 'wpd2';
+const name = 'd2w';
 
 if(chrome.runtime.onMessage) {
   log('bg script start');
 
   var plugin = new Bet({
-    protocol : 'http',
-    host: 'localhost:8080',
-    pathToConfig: 'config.json',
-    pathToModule: '',
-    path: '/',
     timeout: 120000,
     errTimeout: 30000,
     pluginId: name,
     localModules: [{
       f: 0,
       r: 1,
-      h: '(^www\\.drive2\\.ru$)|(^drive2\\.ru$)',
+      h: '^(www\\.)?drive2\\.ru$',
       a: 1,
       l: [
-        '/module.js'
+        '/d2.js'
       ]
     }]
   });
 
-  brex.load();
+  plugin.load();
+
   chrome.contextMenus.create(
     {
       title: 'Установить обои',
@@ -38,6 +37,6 @@ if(chrome.runtime.onMessage) {
   );
 
   function setWallpaper (info) {
-    brex.talker.api.localStorage.set(`${name}paper`, info.srcUrl);
+    plugin.talker.api.localStorage.set(`${name}paper`, info.srcUrl);
   }
 }

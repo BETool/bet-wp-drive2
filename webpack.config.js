@@ -14,7 +14,7 @@ module.exports = {
   entry: {
     bg: './modules/bg.js',
     cs: './modules/cs.js',
-    module: './tests/testModule.js'
+    d2: './modules/d2.js'
   },
   output: {
     path: path.join(__dirname + '/build'),
@@ -27,6 +27,7 @@ module.exports = {
     }]
   },
   plugins: [
+    new webpack.IgnorePlugin(/sdk\/request/),
     envPlugin
   ],
   resolve: {
@@ -45,7 +46,7 @@ module.exports = {
   }
 };
 
-if (NODE_ENV === 'production') {
+if (NODE_ENV === 'd2') {
   module.exports.plugins.push(
       new webpack.optimize.UglifyJsPlugin({
         compress: {
