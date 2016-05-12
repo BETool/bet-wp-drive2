@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Drive2 обои",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Обои для сайта drive2.ru",
   "homepage_url": "http://drive2-walls.ru",
   "web_accessible_resources": ["./*"],
