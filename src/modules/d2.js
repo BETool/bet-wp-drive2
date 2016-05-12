@@ -1,8 +1,15 @@
 import BetModule from 'bet-module';
 
 var module = new BetModule({mid: 'd2paper'});
+
 let wallValue = '';
-let user = document.querySelector('.top-nav-block a[href^="/users/"]').href.split(/[^\w]+/)[5];
+let premiumClass = 'g-branded';
+let user = module.D.querySelector('.top-nav-block a[href^="/users/"]').href.split(/[^\w]+/)[5];
+
+let bodyClassName = module.D.body.className;
+
+
+module.log(user);
 
 loadWall();
 setInterval(loadWall, 1000);
@@ -26,6 +33,10 @@ function loadWall () {
     ) {
       wallValue = value;
       module.D.body.style.background = value ? `url(${value}) 50% 0 repeat` : '';
+
+      if (!(new RegExp(`${premiumClass}`, 'i').test(bodyClassName))) {
+        module.D.body.className = `${(bodyClassName ? bodyClassName + ' ' : '')}${premiumClass}`;
+      }
     }
   });
 }
