@@ -17,6 +17,8 @@ setInterval(loadWall, 1000);
 function loadWall () {
   module.A.gs.get('paper', value => {
     if (
+      value
+      &&
       wallValue !== value
       &&
       module.W
