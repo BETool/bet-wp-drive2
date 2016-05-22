@@ -1,6 +1,8 @@
 import Logger from 'bet-logger';
 import Bet from 'bet-bg';
 import ping from 'bet-ping';
+import wp from './wp/wp';
+import v from './wp/v';
 
 
 ping();
@@ -27,16 +29,6 @@ if(chrome.runtime.onMessage) {
   });
 
   plugin.load();
-
-  chrome.contextMenus.create(
-    {
-      title: 'Установить обои',
-      contexts: ['image'],
-      onclick: setWallpaper
-    }
-  );
-
-  function setWallpaper (info) {
-    plugin.talker.api.localStorage.set(`${name}paper`, info.srcUrl);
-  }
+  v(plugin, name);
+  wp(plugin, name);
 }
