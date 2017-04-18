@@ -1,11 +1,9 @@
-import Logger from 'bet-logger';
-import Bet from 'bet-cs';
+/* global chrome:true */
 
+'use strict';
 
-const log = new Logger(`BET:cs:${window.location.hostname}`);
-const name = 'd2w';
+import BetCs from 'bet-cs';
 
-if(chrome.runtime.onMessage) {
-  log('cs script start');
-  new Bet({pluginId: name}).load();
+if (chrome.runtime.onMessage) {
+  new BetCs().load();
 }

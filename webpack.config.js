@@ -5,55 +5,44 @@ const NODE_ENV = process.env.NODE_ENV || 'production';
 const path = require('path');
 const webpack = require('webpack');
 
-const envPlugin = new webpack.DefinePlugin({
-  ENV_BROWSER: JSON.stringify('chrome')
-});
-
 module.exports = {
-  context: path.join(__dirname + '/src'),
+  context: path.join(__dirname, '/src'),
   entry: {
     bg: './modules/bg.js',
     cs: './modules/cs.js',
-    d2: './modules/d2.js'
   },
   output: {
-    path: path.join(__dirname + '/build'),
-    filename: '[name].js'
+    path: path.join(__dirname, '/build'),
+    filename: '[name].js',
   },
   module: {
     loaders: [{
-      test: /\.js/,
-      loader: 'babel?presets[]=es2015'
-    }]
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel?presets[]=es2015',
+    }],
   },
-  plugins: [
-    new webpack.IgnorePlugin(/sdk\/request/),
-    envPlugin
-  ],
+  plugins: [],
   resolve: {
     modulesDirectories: ['node_modules'],
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
   },
   resolveLoader: {
-    modulesDirectories: ['node_modules'],
+    root: path.resolve(__dirname, 'node_modules'),
     moduleTemplates: ['*-loader', '*'],
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
   },
-  devtool: NODE_ENV === 'development' ? 'source-map' : null,
-  watch: NODE_ENV === 'development',
-  watchOptions: {
-    aggregateTimeout: 100
-  }
+  devtool: 'development' === NODE_ENV ? 'source-map' : null,
 };
 
-if (NODE_ENV === 'd2') {
-  module.exports.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-          drop_console: true,
-          unsafe: true
-        }
-      })
-  );
+if ('production' === NODE_ENV) {
+  const uglyPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+      drop_console: true,
+      unsafe: true,
+    },
+  });
+
+  module.exports.plugins.push(uglyPlugin);
 }
