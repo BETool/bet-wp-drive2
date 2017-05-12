@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     bg: './modules/bg.js',
     cs: './modules/cs.js',
+    d2: './modules/d2.js',
   },
   output: {
     path: path.join(__dirname, '/build'),
